@@ -2,8 +2,11 @@
 # author: Constantin Blach s4329872
 
 import matplotlib.pyplot as plt
+import numpy as np
 from scipy.io import loadmat
+from sklearn.datasets import load_iris
 from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import LeaveOneOut
 from sklearn.neighbors import KNeighborsClassifier
 
 # exercise 1.1
@@ -54,4 +57,31 @@ for i, synth in enumerate(synths, 1):
     plt.show()
 
 # exercise 1.2
+iris = load_iris(return_X_y=True)
+X = iris[0]
+y = iris[1]
+
+leave_one_out = LeaveOneOut()
+k_range = range(1, 41)
+average_errors = []
+
+for k in k_range:
+    errors = []
+    for train_indices, test_indices in leave_one_out.split(X):
+        X_train = X[train_indices]
+        y_train = y[train_indices]
+        X_test = X[test_indices]
+        y_test = y[test_indices]
+        classifier = KNeighborsClassifier(n_neighbors=k)
+        classifier.fit(X_train, y_train)
+        errors.append(1 - classifier.score(X_test, y_test))
+    average_errors.append(np.mean(errors))
+
+plt.plot(k_range, average_errors)
+plt.title("Iris K Neighbors cross validation")
+plt.xlabel("k")
+plt.ylabel("average classification error")
+plt.show()
+
+
 # exercise 1.3
