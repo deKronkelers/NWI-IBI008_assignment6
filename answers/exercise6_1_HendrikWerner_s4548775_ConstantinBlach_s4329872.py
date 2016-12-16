@@ -19,6 +19,7 @@ for i, synth in enumerate(synths, 1):
     plt.title("Synth {}".format(i))
     plt.xlabel("Attribute 1")
     plt.ylabel("Attribute 2")
+    # plt.savefig("assignment6_1_scatterplot_synth{}.pdf".format(i))
     plt.show()
 
 # exercise 1.2
