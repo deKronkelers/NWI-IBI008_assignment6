@@ -12,11 +12,11 @@ synths = [
     , loadmat("./data/synth4.mat")
 ]
 
-for i, synth in enumerate(synths):
+for i, synth in enumerate(synths, 1):
     # scatterplot
     X = synth["X"]
     plt.scatter(X[:, 0], X[:, 1])
-    plt.title("Synth {}".format(i + 1))
+    plt.title("Synth {}".format(i))
     plt.xlabel("Attribute 1")
     plt.ylabel("Attribute 2")
     plt.show()
