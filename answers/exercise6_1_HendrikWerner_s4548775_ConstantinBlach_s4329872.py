@@ -6,8 +6,10 @@ import numpy as np
 from scipy.io import loadmat
 from sklearn.datasets import load_iris
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import LeaveOneOut
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import NearestNeighbors
 
 # exercise 1.1
 synths = [
@@ -84,5 +86,24 @@ plt.ylabel("average classification error")
 # plt.savefig("assignment6_1_average_classification_error.pdf")
 plt.show()
 
-
 # exercise 1.3
+wine = loadmat("./data/wine.mat")
+X = wine["X"]
+
+X_without_alc = X[:, :10]
+k_range = range(1, 41)
+average_errors = []
+
+classifier = NearestNeighbors(n_neighbors=40)
+classifier.fit(X_without_alc)
+neighbors = X[classifier.kneighbors(return_distance=False)]
+
+for k in k_range:
+    neighbors_alc = neighbors[:, :k, 10]
+    average_errors.append(mean_squared_error(X[:, 10], neighbors_alc.mean(axis=1)))
+
+plt.plot(k_range, average_errors)
+plt.title("Wine KNN regression\nAlcohol Prediction")
+plt.xlabel("k")
+plt.ylabel("mean squared error")
+plt.show()
