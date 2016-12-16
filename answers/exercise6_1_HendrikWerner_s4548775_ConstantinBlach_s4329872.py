@@ -50,6 +50,7 @@ for i, synth in enumerate(synths, 1):
             axes[row][col].set_xlabel("predicted class")
             axes[row][col].set_ylabel("true class")
     f.suptitle("Confusion Matrices Synth {}".format(i))
+    # f.savefig("assignment6_1_confusion_matrices_synth{}.pdf".format(i))
     plt.show()
 
 # exercise 1.2
