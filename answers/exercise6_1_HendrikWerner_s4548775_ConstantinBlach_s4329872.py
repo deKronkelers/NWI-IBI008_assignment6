@@ -81,6 +81,7 @@ plt.plot(k_range, average_errors)
 plt.title("Iris K Neighbors cross validation")
 plt.xlabel("k")
 plt.ylabel("average classification error")
+# plt.savefig("assignment6_1_average_classification_error.pdf")
 plt.show()
 
 
