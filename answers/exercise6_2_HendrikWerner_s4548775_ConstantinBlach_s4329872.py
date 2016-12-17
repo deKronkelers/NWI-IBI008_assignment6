@@ -80,6 +80,7 @@ def learn_network(
     plot_decision_boundary(network)
     scatter_plot_by_class(X)
     plt.title("Neural Network (hidden units={})\nDecision Boundary".format(hidden_units))
+    # plt.savefig("assignment6_2_estimated_classification_error_{}hidden.pdf".format(hidden_units))
     plt.show()
 
 
