@@ -63,5 +63,24 @@ def estimate_classification_error(
 
     return np.mean(errors)
 
+
+def learn_network(
+        X: np.ndarray
+        , y: np.ndarray
+        , hidden_units: int = 1
+) -> None:
+    network = nl.net.newff(
+        [[0, 1], [0, 1]]
+        , [hidden_units, 1]
+        , [nl.trans.TanSig(), nl.trans.TanSig()]
+    )
+    print("Estimated Classification error ({} hidden layer): {}".format(
+        hidden_units, estimate_classification_error(X, y, network))
+    )
+    plot_decision_boundary(network)
+    scatter_plot_by_class(X)
+    plt.title("Neural Network (hidden units={})\nDecision Boundary".format(hidden_units))
+    plt.show()
+
 # exercise 2.3
 # exercise 2.4
