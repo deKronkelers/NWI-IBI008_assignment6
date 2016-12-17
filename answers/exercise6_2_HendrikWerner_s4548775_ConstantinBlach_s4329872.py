@@ -18,6 +18,7 @@ plt.title("Xor Scatterplot")
 plt.xlabel("Attribute 1")
 plt.ylabel("Attribute 2")
 plt.legend(loc="lower left")
+# plt.savefig("assignment6_2_scatter_plot_xor.pdf")
 plt.show()
 
 # exercise 2.2
