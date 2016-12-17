@@ -48,7 +48,9 @@ def plot_decision_boundary(nw) -> None:
 
 
 def estimate_classification_error(
-        network
+        X: np.ndarray
+        , y: np.ndarray
+        , network
         , n_splits: int = 10
 ) -> int:
     k_fold = KFold(n_splits=n_splits)
