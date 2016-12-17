@@ -1,8 +1,9 @@
 # author: Hendrik Werner s4549775
 # author: Constantin Blach s4329872
 
-import neurolab
 import matplotlib.pyplot as plt
+import neurolab as nl
+import numpy as np
 from scipy.io import loadmat
 
 # exercise 2.1
@@ -26,6 +27,23 @@ plt.title("Xor Scatterplot")
 # plt.savefig("assignment6_2_scatter_plot_xor.pdf")
 plt.show()
 
+
 # exercise 2.2
+def plot_decision_boundary(nw) -> None:
+    plt.figure(1)
+    plt.hold(True)
+    delta = 0.05
+    levels = 100
+    a = np.arange(-1, 2, delta)
+    b = np.arange(-1, 2, delta)
+    A, B = np.meshgrid(a, b)
+    values = np.zeros(A.shape)
+
+    for i in range(len(a)):
+        for j in range(len(b)):
+            values[i, j] = nw.sim(np.mat([a[i], b[j]]))[0, 0]
+    plt.contour(A, B, values, levels=[.5], colors=['k'], linestyles='dashed')
+    plt.contourf(A, B, values, levels=np.linspace(values.min(), values.max(), levels), cmap=plt.cm.RdBu)
+
 # exercise 2.3
 # exercise 2.4
