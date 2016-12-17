@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import neurolab as nl
 import numpy as np
 from scipy.io import loadmat
+from sklearn.model_selection import KFold
 
 # exercise 2.1
 xor = loadmat("./data/xor.mat")
@@ -44,6 +45,21 @@ def plot_decision_boundary(nw) -> None:
             values[i, j] = nw.sim(np.mat([a[i], b[j]]))[0, 0]
     plt.contour(A, B, values, levels=[.5], colors=['k'], linestyles='dashed')
     plt.contourf(A, B, values, levels=np.linspace(values.min(), values.max(), levels), cmap=plt.cm.RdBu)
+
+
+def estimate_classification_error(
+        network
+        , n_splits: int = 10
+) -> int:
+    k_fold = KFold(n_splits=n_splits)
+    mae = nl.error.MAE()
+    errors = []
+
+    for train_indices, test_indices in k_fold.split(X, y):
+        network.train(X[train_indices], y[train_indices])
+        errors.append(mae(y[test_indices], network.sim(X[test_indices])))
+
+    return np.mean(errors)
 
 # exercise 2.3
 # exercise 2.4
