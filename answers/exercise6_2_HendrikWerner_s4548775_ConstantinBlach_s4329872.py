@@ -82,5 +82,11 @@ def learn_network(
     plt.title("Neural Network (hidden units={})\nDecision Boundary".format(hidden_units))
     plt.show()
 
+
+learn_network(X, y)
+
 # exercise 2.3
+learn_network(X, y, hidden_units=2)
+
 # exercise 2.4
+learn_network(X, y, hidden_units=10)
